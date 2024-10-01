@@ -1,0 +1,5 @@
+
+- name: Install python
+  become: true
+  apt:
+    name: python3

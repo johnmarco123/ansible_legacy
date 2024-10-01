@@ -1,0 +1,86 @@
+- hosts: localhost
+  vars:
+    source_key: "./.ssh/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    personal: "{{ lookup('env', 'HOME') }}/personal"
+  pre_tasks:
+  - name: Update Apt
+    become: true
+    apt:
+      force_apt_get: true
+      update_cache: true
+      state: present
+    tags:
+      - install
+      - core
+  tasks:
+    - name: Starting ssh tasks
+      import_tasks: tasks/ssh.yml
+      tags: 
+        - install
+        - ssh
+        - dotfiles
+
+    - name: Starting git setup tasks
+      import_tasks: tasks/git-setup.yml
+      tags:
+        - install
+        - git
+
+    - name: Starting core-setup tasks
+      import_tasks: tasks/core-setup.yml
+      tags:
+        - install
+        - neovim
+        - core
+
+#    - name: Starting python-setup tasks
+#      import_tasks: tasks/python-setup.yml
+#      tags: 
+#        - install
+#        - python
+    
+    - name: Starting nvim-setup tasks
+      import_tasks: tasks/nvim-setup.yml
+      tags:
+        - install
+        - neovim
+        - nvim
+
+    - name: Starting node-setup tasks
+      import_tasks: tasks/node-setup.yml
+      tags:
+        - install
+        - node
+
+    - name: Starting npm-packages tasks
+      import_tasks: tasks/npm-packages.yml
+      tags:
+        - install
+        - node
+        - npm
+    
+    - name: Starting dotfiles tasks
+      import_tasks: tasks/dotfiles.yml
+      tags:
+        - install
+        - dotfiles
+        - stow
+    
+    - name: Starting productivity-tools tasks
+      import_tasks: tasks/productivity-tools.yml
+      tags: 
+        - install
+        - productivity
+
+    - name: Starting lsp tasks
+      import_tasks: tasks/lsp.yml
+      tags: 
+        - install
+        - lsp
+
+#    - name: Starting projects tasks
+#      import_tasks: tasks/projects.yml
+#      tags: 
+#        - install
+#        - projects
