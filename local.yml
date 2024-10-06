@@ -34,12 +34,12 @@
         - neovim
         - core
 
-#    - name: Starting python-setup tasks
-#      import_tasks: tasks/python-setup.yml
-#      tags: 
-#        - install
-#        - python
-    
+    - name: Starting python-setup tasks
+      import_tasks: tasks/python-setup.yml
+      tags: 
+        - install
+        - python
+   
     - name: Starting nvim-setup tasks
       import_tasks: tasks/nvim-setup.yml
       tags:
@@ -79,8 +79,8 @@
         - install
         - lsp
 
-#    - name: Starting projects tasks
-#      import_tasks: tasks/projects.yml
-#      tags: 
-#        - install
-#        - projects
+    - name: Starting projects tasks
+      import_tasks: tasks/projects.yml
+      tags: 
+        - install
+        - projects
